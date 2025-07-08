@@ -1,0 +1,32 @@
+<div class="box">
+  <form [formGroup]="myForm">
+    <fieldset>
+      <legend>Image to Text conversion</legend>
+      <div class="form-control">
+        <label class="form-label"
+          >Click on Choose file button to upload image</label
+        >
+        <input
+          type="file"
+          formControlName="img"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="form-control btn-primary"
+        />
+        @if (base64Image) {
+          <img width="330px" [src]="base64Image">
+        }
+       </div>
+       <div class="form-control">
+        <button type="button" class="btn btn-success" (click)="send()">
+          Send
+        </button>
+      </div>
+    </fieldset>
+  </form>
+  @if (loading()) {
+  <app-loading></app-loading>
+  } @else {
+  <div [innerHtml]="result"></div>
+  }
+</div>
